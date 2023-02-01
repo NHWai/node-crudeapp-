@@ -14,7 +14,7 @@ const uploadImgForm = document.querySelector(".uploadImgForm");
 const uploadBtn = document.querySelector(".uploadBtn");
 const fileEl = document.querySelector("#file");
 
-const api = "https://node-crudeapp.vercel.app";
+const api = "http://localhost:3000";
 let closeElArr;
 let editElArr;
 let cardElArr;
