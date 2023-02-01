@@ -13,19 +13,21 @@ const usersList = document.querySelector(".usersList");
 const uploadImgForm = document.querySelector(".uploadImgForm");
 const uploadBtn = document.querySelector(".uploadBtn");
 const fileEl = document.querySelector("#file");
+
+const api = "http://localhost:3000";
 let closeElArr;
 let editElArr;
 let cardElArr;
 
 const getUsrs = async function () {
-  const res = await fetch("http://localhost:3000/users");
+  const res = await fetch(`${api}/users`);
   const data = await res.json();
   renderUsers(data);
   return;
 };
 
 const getSpecificUsr = async function (id) {
-  const res = await fetch(`http://localhost:3000/users/${id}`);
+  const res = await fetch(`${api}/users/${id}`);
   const data = await res.json();
   // renderUsers(data);
   console.log(data);
@@ -85,7 +87,7 @@ const renderUsers = function (usrs) {
   //listening edit events
   for (let i = 0; i < editElArr.length; i++) {
     editElArr[i].addEventListener("click", async () => {
-      const res = await fetch(`http://localhost:3000/user-${i}`);
+      const res = await fetch(`${api}/user-${i}`);
       const data = await res.json();
 
       cardElArr[i].style = "display:none;";
@@ -117,7 +119,7 @@ const handleForm = function () {
 
       if (id.length === 0) {
         //create new card
-        const res = await fetch("http://localhost:3000/users", {
+        const res = await fetch(`${api}/users`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -128,7 +130,7 @@ const handleForm = function () {
         renderUsers(data);
       } else {
         // edit existing card
-        const res = await fetch(`http://localhost:3000/user-${id}`, {
+        const res = await fetch(`${api}/user-${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -148,7 +150,7 @@ const handleForm = function () {
 };
 
 const delCard = async function (id) {
-  const res = await fetch(`http://localhost:3000/user-${id}`, {
+  const res = await fetch(`${api}/user-${id}`, {
     method: "DELETE",
   });
   const data = await res.json();
@@ -167,7 +169,7 @@ const editCard = function (id, card) {
 
 const postFile = async function (content) {
   console.log("in post file =>", content);
-  const res = await fetch("http://localhost:3000/fileupload", {
+  const res = await fetch(`${api}/fileupload`, {
     method: "POST",
     body: content,
   });
