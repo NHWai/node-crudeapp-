@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <form class="mb-3 formEl">
+        <div class="mb-3">
+          <label for="usrName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="usrName" required />
+        </div>
+        <div class="mb-3">
+          <label for="usrEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="usrEmail" required />
+        </div>
+        <div class="mb-3">
+          <label for="usrPwd" class="form-label">Password</label>
+          <input type="password" class="form-control" id="usrPwd" required />
+        </div>
+        <div style="display: none" class="usrEdit" id="usrId"></div>
+        <button type="submit" class="btn btn-primary formSubmit">
+          Register
+        </button>
+      </form>
+      <div class="usersList"></div>
+      <form class="uploadImgForm">
+        <input id="file" type="file" accept="image/*,video/*" />
+        <button class="uploadBtn">Upload</button>
+      </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
