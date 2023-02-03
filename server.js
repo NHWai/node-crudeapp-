@@ -2,7 +2,11 @@ const fs = require("fs");
 const http = require("http");
 const qs = require("querystring");
 const port = 3000;
-let users = [];
+let users = [
+  { fName: "ngng", email: "nai@g.io", password: "eiuop" },
+  { fName: "ngng", email: "ang@g.io", password: "eiuop" },
+  { fName: "ngng", email: "org@g.io", password: "eiuop" },
+];
 
 const validateEmail = (email) => {
   const emailPattern = String(email)
