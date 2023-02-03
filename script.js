@@ -14,7 +14,7 @@ const uploadImgForm = document.querySelector(".uploadImgForm");
 const uploadBtn = document.querySelector(".uploadBtn");
 const fileEl = document.querySelector("#file");
 
-const api = "http://localhost:3000";
+const api = "https://node-crude-app.onrender.com";
 let closeElArr;
 let editElArr;
 let cardElArr;
