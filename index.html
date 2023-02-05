@@ -29,15 +29,17 @@
           <label for="usrPwd" class="form-label">Password</label>
           <input type="password" class="form-control" id="usrPwd" required />
         </div>
-        <div style="display: none" class="usrEdit" id="usrId"></div>
-        <button type="submit" class="btn btn-primary formSubmit">
+        <div style="display: none" id="usrId"></div>
+        <button type="submit" class="btn btn-primary shadow-none formSubmit">
           Register
         </button>
       </form>
       <div class="usersList"></div>
       <form class="uploadImgForm">
         <input id="file" type="file" accept="image/*,video/*" />
-        <button class="uploadBtn">Upload</button>
+        <button type="button" class="btn btn-success shadow-none uploadBtn">
+          Upload
+        </button>
       </form>
     </div>
 

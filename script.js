@@ -4,7 +4,6 @@ const main = document.querySelector(".main");
 const usrName = document.querySelector("#usrName");
 const usrEmail = document.querySelector("#usrEmail");
 const usrPwd = document.querySelector("#usrPwd");
-const usrEdit = document.querySelector(".usrEdit");
 const usrId = document.querySelector("#usrId");
 const formSubmit = document.querySelector(".formSubmit");
 const formEl = document.querySelector(".formEl");
@@ -14,7 +13,9 @@ const uploadImgForm = document.querySelector(".uploadImgForm");
 const uploadBtn = document.querySelector(".uploadBtn");
 const fileEl = document.querySelector("#file");
 
-const api = "https://node-crude-app.onrender.com";
+// const api = "https://node-crude-app.onrender.com";
+const api = "http://localhost:3000";
+
 let closeElArr;
 let editElArr;
 let cardElArr;
@@ -26,56 +27,42 @@ const getUsrs = async function () {
   return;
 };
 
-const getSpecificUsr = async function (id) {
-  const res = await fetch(`${api}/users/${id}`);
-  const data = await res.json();
-  // renderUsers(data);
-  console.log(data);
-  return;
-};
-
 const renderUsers = function (usrs) {
   let innerEl = "";
   for (const el of usrs) {
     innerEl += `
-    <div class='cardEl'>
-      <div
-        style="
-                display: flex;
-                justify-content: flex-end;
-                padding-top: 0.2rem;
-              "
-      >
-        <div class='editCard'>
-            <ion-icon
-            style="color: green; cursor: pointer; margin-right: 0.2rem"
-            name="create-outline"></ion-icon>
-        </div>
-        <div data-doc=${usrs.indexOf(el)} class='closeCard'>   
-            <ion-icon
-            class='close'
-              style="color: red; cursor: pointer"
-              name="close-outline"
-            ></ion-icon>
-        </div>
+    <div style='user-select: none;' class='cardEl'>
+    <div class='d-flex justify-content-end'>
+      <div class='editCard'>
+          <ion-icon class='text-success'
+          style="cursor: pointer; margin-right: 0.2rem"
+          name="create-outline"></ion-icon>
       </div>
-      <div><span> Name : </span> <span style='margin-left:0.3rem'>${
-        el.fName
-      } </span></div>
-      <div> <span>Email : </span>  <span style='margin-left:0.3rem' >${
-        el.email
-      }</span></div>
-      <div> <span>Password : </span> <span style='margin-left:0.3rem'>${
-        el.pwd
-      }</span></div>
-      <div style='display:none;' >${el.isEdit}</div>
+      <div data-doc=${usrs.indexOf(el)} class='closeCard'>   
+          <ion-icon class='text-danger'
+            style="cursor: pointer"
+            name="close-outline"
+          ></ion-icon>
+      </div>
     </div>
+    <div><span> Name : </span> <span  style='margin-left:0.3rem'> </span></div>
+    <div> <span>Email : </span>  <span  style='margin-left:0.3rem' ></span></div>
+    <div> <span>Password : </span> <span style='margin-left:0.3rem'></span></div>
+  </div>
     `;
   }
 
   usersList.innerHTML = innerEl;
 
   cardElArr = [...document.querySelectorAll(".cardEl")];
+  //assigning textContent instead of directly putting the element's content
+  //This is to protect xss attack
+  for (let i = 0; i < cardElArr.length; i++) {
+    cardElArr[i].childNodes[3].childNodes[2].textContent = usrs[i].fName;
+    cardElArr[i].childNodes[5].childNodes[3].textContent = usrs[i].email;
+    cardElArr[i].childNodes[7].childNodes[3].textContent = usrs[i].pwd;
+  }
+
   closeElArr = [...document.querySelectorAll(".closeCard")];
   editElArr = [...document.querySelectorAll(".editCard")];
 
@@ -89,8 +76,15 @@ const renderUsers = function (usrs) {
     editElArr[i].addEventListener("click", async () => {
       const res = await fetch(`${api}/user-${i}`);
       const data = await res.json();
+      const filteredCard = cardElArr.filter((el, id) => id !== i);
 
-      cardElArr[i].style = "display:none;";
+      //making sure rest of the cards are not blurred
+      for (const eachCard of filteredCard) {
+        eachCard.style = " user-select: none;";
+      }
+
+      //blur the card which is in edit form
+      cardElArr[i].style = "filter: blur(2px); user-select: none;";
 
       const currCard = {
         fName: data.fName,
@@ -168,7 +162,6 @@ const editCard = function (id, card) {
 };
 
 const postFile = async function (content) {
-  console.log("in post file =>", content);
   const res = await fetch(`${api}/fileupload`, {
     method: "POST",
     body: content,
@@ -182,7 +175,6 @@ uploadBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const incomingFile = fileEl.files[0];
   uploadImgForm.reset();
-  console.log(incomingFile);
   postFile(incomingFile);
 });
 
