@@ -14,8 +14,8 @@ const uploadBtn = document.querySelector(".uploadBtn");
 const fileEl = document.querySelector("#file");
 
 // const api = "https://node-crude-app.onrender.com";
-// const api = "http://localhost:3000";
-const api = "https://node-crudeapp.vercel.app";
+const api = "http://localhost:3000/";
+// const api = window.location.href;
 
 let closeElArr;
 let editElArr;
