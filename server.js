@@ -2,11 +2,7 @@ const fs = require("fs");
 const http = require("http");
 const qs = require("querystring");
 const port = 3000;
-let users = [
-  { fName: "ngng", email: "nai@g.io", pwd: "eiuop" },
-  { fName: "ngng", email: "ang@g.io", pwd: "eiuop" },
-  { fName: "ngng", email: "org@g.io", pwd: "eiuop" },
-];
+const users = require("./db.json");
 
 const validateEmail = (email) => {
   const emailPattern = String(email)
