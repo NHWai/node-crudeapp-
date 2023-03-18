@@ -1,7 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const qs = require("querystring");
-const port = 3000;
+const port = process.env.PORT || 3000;
 const users = require("./db.json");
 
 const validateEmail = (email) => {
