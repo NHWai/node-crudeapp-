@@ -15,7 +15,7 @@ const fileEl = document.querySelector("#file");
 
 // const api = "https://node-crude-app.onrender.com";
 // const api = "http://localhost:3000";
-const api = window.location.href;
+const api = "https://node-crudeapp-4reel6u8n-nhwai.vercel.app/";
 
 let closeElArr;
 let editElArr;
